@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Campo Minato</string>
+    <string name="action_settings">Impostazioni</string>
+    <string name="title_activity_minesweeper">Campo Minato</string>
+    <string name="new_game">Nuovo Gioco</string>
+    <string name="continue_game">Continua</string>
+    <string name="high_scores">Punteggi</string>
+    <string name="rules">Regole</string>
+    <string name="rules_content">Lo scopo del gioco è quello di scoprire tutte le caselle dove non sono presenti mine (o fiori). Ogni casella "buona" può essere vuota o contenere un numero: nel primo caso vengono aperte automaticamente tutte le caselle vuote confinanti fino a che non si arriva alle prime contenenti dei numeri, mentre nel secondo il numero sta ad indicare quante delle caselle "confinanti" contengono una mina o un fiore.</string>
+    <string name="rules_title">Regole</string>
+    <string name="difficulty_title">Difficoltà</string>
+    <string name="easy_label">Facile</string>
+    <string name="normal_label">Normale</string>
+    <string name="timer"></string>
+    <string name="smiley"></string>
+    <string name="exit">Esci</string>
+
+</resources>
