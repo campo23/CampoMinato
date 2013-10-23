@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TableRow.LayoutParams;
+import android.widget.TextView;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.View.OnClickListener;
+import android.os.Handler;
 
 
 public class Game extends Activity
@@ -22,16 +24,20 @@ public class Game extends Activity
   static final int mediumRows = 11;
   static final int easyColumns = 7;
   static final int mediumColumns = 7;
-  static final int easyMines = 10;
-  static final int mediumMines = 40;
+  static final int easyMines = 7;
+  static final int mediumMines = 12;
   int diff;
   int totalCols;
   int totalRows;
-  int totalMines;
-  Tile[][] tiles;
+  int totalMines; 
   int tilePadding = 1;
   int tileWH = 78;
+  int secondsPassed = 0;
+  Tile[][] tiles;
   TableLayout mineField;
+  TextView timerText;
+  Handler timer = new Handler();
+  
   
   @Override
   protected void onCreate(Bundle savedInstanceState)
@@ -40,6 +46,7 @@ public class Game extends Activity
 	  setContentView(R.layout.game);
 	  diff = getIntent().getIntExtra(KEY_DIFFICULTY, DIFFICULTY_EASY);
 	  mineField = (TableLayout) findViewById(R.id.MineField);   
+	  timerText = (TextView) findViewById(R.id.Timer);
 	  createGameBoard(diff);
 	  showGameBoard();
   }
@@ -47,18 +54,17 @@ public class Game extends Activity
   public void createGameBoard(int diff)
   {
     //set total rows and columns based on the difficulty
-    totalRows = easyRows;
-    totalCols = easyColumns;
-    totalMines = easyMines;
-    switch(diff)
+    if (diff == 0) 
     {
-      case 0:
-        break;
-      case 1:
+    	totalRows = easyRows;
+    	totalCols = easyColumns;
+    	totalMines = easyMines;
+    }
+    else if (diff == 1)
+    {
         totalRows = mediumRows;
         totalCols = mediumColumns;
         totalMines = mediumMines;
-        break;
     }
     
     //setup the tiles array
@@ -86,6 +92,7 @@ public class Game extends Activity
 			if(!timerStarted)
             {
               timerStarted = true;
+              startTimer();
             }
             boolean minesSet = false;
 			if(!minesSet)
@@ -123,6 +130,7 @@ public class Game extends Activity
         });
       }
     }
+    setupMineField(totalRows, totalCols);
   }
   
   public void showGameBoard()
@@ -230,7 +238,7 @@ public class Game extends Activity
       long currentMilliseconds = System.currentTimeMillis();
       ++secondsPassed;
       String curTime = Integer.toString(secondsPassed);
-      //update the text view
+	//update the text view
       if (secondsPassed < 10)
       {
         timerText.setText("00" + curTime);
@@ -248,7 +256,19 @@ public class Game extends Activity
       timer.postDelayed(updateTimer, 1000);
     }
   };
-
+  
+ /* public void endGame()
+  {
+    imageButton.setBackgroundResource(R.drawable.smile);
+    
+    // remove the table rows from the minefield table layout
+    mineField.removeAllViews();
+    
+    // reset variables
+    timerStarted = false;
+    minesSet = false;
+  }
+*/
   
   public void winGame() {}
   

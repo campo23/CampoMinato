@@ -41,12 +41,17 @@ public class Tile extends Button
   
   public void setMine(boolean mine)
   {
+    isMine = true;
+    isCovered = false;
     
+    this.setBackgroundResource(R.drawable.mine);
   }
   
   public void setFlag(boolean flag)
   {
+    isFlag = true;
     
+    this.setBackgroundResource(R.drawable.flag);
   }
   
   public void setQuestionMark(boolean flag)
@@ -56,7 +61,9 @@ public class Tile extends Button
   
   public void setUncovered()
   {
+    isCovered = false;
     
+    this.setBackgroundResource(R.drawable.tileb);
   }
   
   public void setSurroundingNumber(int number)
@@ -80,6 +87,7 @@ public class Tile extends Button
   //set the tile as a mine
   public void plantMine()
   {
+	  
   }
   
   public void triggerMine()
